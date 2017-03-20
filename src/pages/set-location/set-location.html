@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Choose Location</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<sebm-google-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="16"></sebm-google-map>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add a Place</ion-title>
+  </ion-navbar>
+
+</ion-header>
+ 
+
+<ion-content padding>
+	<form #f="ngForm" (ngSubmit)="submitForm(f)"> 
+		<ion-list>
+			<ion-item>
+				<ion-label fixed>Title</ion-label>
+				<ion-input type="text" placeholder="Ex. Vermont" name="title" ngModel required></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label floating>Short Description</ion-label>
+				<ion-textarea name="description" ngModel required></ion-textarea>
+			</ion-item>
+		</ion-list>
+		
+		<ion-grid>
+		
+			<ion-row>
+				<ion-col>
+					<button type="button" ion-button block outline icon-left (click)="getLocation()">
+						<ion-icon name="locate"></ion-icon>
+						Get Location
+					</button>
+				</ion-col>
+				<ion-col>
+					<button type="button" ion-button block outline icon-left (click)="openMap()">
+						<ion-icon name="map"></ion-icon>
+						Find on Map
+					</button>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col>
+					<p>Selected Place ...</p>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col text-center>
+					<h5>Take a photo!</h5>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col text-center>
+					<button ion-button block outline icon-left type="button" (click)="openCamera()">
+						<ion-icon name="camera"></ion-icon>
+						Open Camera
+					</button>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col>
+					<img [src]=""/>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col>
+					<button ion-button color="secondary" block type="submit" [disabled]="!f.valid">Add place</button>
+				</ion-col>
+			</ion-row>
+			
+		</ion-grid>		
+		
+	</form>
+</ion-content>
