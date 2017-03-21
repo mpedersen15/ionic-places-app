@@ -24,6 +24,13 @@ export class AddPlacePage {
   
 	const modal = this.modalCtrl.create(SetLocationPage, {location: this.location});
 	modal.present();
+	
+	modal.onDidDismiss( (data) => {
+		if (data) {
+			console.log(data);
+			this.location = data.marker;
+		};
+	});
   }
   
 }

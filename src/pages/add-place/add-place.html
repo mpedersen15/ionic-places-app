@@ -40,6 +40,7 @@
 			<ion-row>
 				<ion-col>
 					<p>Selected Place ...</p>
+					<p *ngIf="location">{{location.lat}}, {{location.lng}}</p>
 				</ion-col>
 			</ion-row>
 			
