@@ -11,6 +11,9 @@ export class SetLocationPage {
 	marker: Location;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 	this.location = navParams.get('location');
+	if (navParams.get('isSelected')){
+		this.marker = this.location;
+	}
   }
 
   setMarker(event: any){
