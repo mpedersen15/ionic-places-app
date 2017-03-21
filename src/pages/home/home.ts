@@ -1,15 +1,29 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { AddPlacePage } from '../add-place/add-place';
+import { Place } from '../../models/place.model';
+import { PlacesService } from '../../services/places.service';
+import { PlacePage } from '../place/place';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 	addPlacePage = AddPlacePage;
-  constructor(public navCtrl: NavController) {
-    
-  }
+	places: Place[] = [];
+	
+	constructor(public navCtrl: NavController, public placesService: PlacesService, public modalCtrl: ModalController) {
 
+	}
+
+	ionViewWillEnter(){
+		this.places = this.placesService.getPlaces();
+	}
+	
+	openPlace(place: Place){
+		const modal = this.modalCtrl.create(PlacePage, {place});
+		modal.present();
+	}
 }
