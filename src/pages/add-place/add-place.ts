@@ -96,7 +96,7 @@ export class AddPlacePage {
 				.then( (data: Entry) => {
 					console.log('move file success', data);
 					this.imageUrl = data.nativeURL;
-					Camera.cleanup();
+					//Camera.cleanup();
 				}).catch( (error: FileError) => {
 					console.log('move file error', error);
 					this.imageUrl = "";
