@@ -32,14 +32,7 @@
     "@ionic/app-scripts": "1.1.4",
     "typescript": "2.0.9"
   },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-device",
-    "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
-  ],
+  "cordovaPlugins": [],
   "cordovaPlatforms": [],
   "description": "ionic-places: An Ionic project"
 }

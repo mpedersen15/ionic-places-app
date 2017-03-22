@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { NavController, NavParams, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { SetLocationPage } from '../set-location/set-location';
 import { Location } from '../../models/location.model';
-import { Geolocation, Camera, CameraOptions } from 'ionic-native';
+import { Geolocation, Camera, File, Entry ,FileError} from 'ionic-native';
 import { PlacesService } from '../../services/places.service';
 
+declare var cordova: any;
 
 @Component({
   selector: 'page-add-place',
@@ -76,7 +77,8 @@ export class AddPlacePage {
 		const toast = this.toastCtrl.create({
 			message: "Could not get location, try again later or pick manually",
 			duration: 2000
-		})
+		});
+		toast.present();
 	});
   }
   
@@ -87,9 +89,35 @@ export class AddPlacePage {
 	}).then(
 		(data) => {
 			console.log('success getPicture', data);
+			const currentName = data.replace(/^.*[\\\/]/, '');
+			const path = data.replace(/[^\/]*$/, '');
+			console.log(currentName, path);
+			File.moveFile(path, currentName, cordova.file.dataDirectory, currentName)
+				.then( (data: Entry) => {
+					console.log('move file success', data);
+					this.imageUrl = data.nativeURL;
+					Camera.cleanup();
+				}).catch( (error: FileError) => {
+					console.log('move file error', error);
+					this.imageUrl = "";
+					const toast = this.toastCtrl.create({
+						message: "Could not save image file",
+						duration: 2000
+					});
+					
+					toast.present();
+					Camera.cleanup();
+				});
 			this.imageUrl = data;
+			
 		}, (error)=>{
 			console.log('error getPicture', error);
+			const toast = this.toastCtrl.create({
+				message: "Could not save image file",
+				duration: 2000
+			});
+			
+			toast.present();
 		}
 	)
   }
