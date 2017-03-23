@@ -19,7 +19,9 @@ export class HomePage implements OnInit{
 	}
 
 	ionViewWillEnter(){
+		
 		this.places = this.placesService.getPlaces();
+		console.log('ionViewWillEnter', this.places);
 	}
 	
 	openPlace(place: Place, index:number){
@@ -28,8 +30,11 @@ export class HomePage implements OnInit{
 	}
 	
 	ngOnInit(){
-		this.placesService.fetchPlaces();
-		this.loadPlaces();
+		this.placesService.fetchPlaces()
+			.then( (places: Place[]) => {
+				this.places = places;
+			});
+		//this.loadPlaces();
 	}
 	
 	loadPlaces(){
